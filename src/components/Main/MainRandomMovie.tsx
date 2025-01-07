@@ -38,7 +38,7 @@ export default function MainRandomMovie() {
   return (
     <div
       style={{
-        backgroundImage: `url("https://image.tmdb.org/t/p/original/${randomMovie?.backdrop_path}")`,
+        backgroundImage: `url("${imageUrl}${randomMovie?.backdrop_path}")`,
       }}
       className={`w-full h-screen bg-no-repeat bg-center bg-cover relative flex items-center`}
     >
