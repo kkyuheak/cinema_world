@@ -32,7 +32,7 @@ export default function Header() {
     <>
       <div
         className={`${
-          isVisible ? "bg-white" : "bg-transparent"
+          isVisible ? "bg-[#2a2a2a] border-b border-[#000]" : "bg-transparent"
         } h-[60px] px-16 flex items-center justify-between
         fixed w-full z-40`}
       >
