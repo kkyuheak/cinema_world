@@ -1,12 +1,19 @@
 // import mainBg from "../assets/img/main-bg.jpg";
 
+import { useOutletContext } from "react-router";
 import VideoLists from "../VideoLists";
 import MainRandomMovie from "./MainRandomMovie";
+import { RefObject } from "react";
+
+type ContextType = RefObject<HTMLDivElement>;
 
 export default function Main() {
+  const mainRef = useOutletContext<ContextType>();
+
   return (
     <div>
       <div
+        ref={mainRef}
         className={`bg-[url("/src/assets/img/main-bg.jpg")] h-screen bg-no-repeat 
         bg-cover bg-center bg-fixed bg-[#000000] w-full before:mainbg_before`}
       >
@@ -21,7 +28,7 @@ export default function Main() {
         <MainRandomMovie />
       </div>
 
-      <div className="bg-slate-500 pt-[150px] flex flex-col gap-10">
+      <div className="bg-slate-500 pt-[150px] flex flex-col gap-10 h-[10000px]">
         <VideoLists title="인기작 TOP 20" name="popular" />
 
         <VideoLists title="현재 상영중인 영화" name="now_playing" />

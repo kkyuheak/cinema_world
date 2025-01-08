@@ -1,11 +1,40 @@
+import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router";
 
 export default function Header() {
+  const [isVisible, setIsVisible] = useState(false);
+  const mainRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(!entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0,
+      }
+    );
+
+    if (mainRef.current) {
+      observer.observe(mainRef.current);
+    }
+
+    return () => {
+      if (mainRef.current) {
+        observer.unobserve(mainRef.current);
+      }
+    };
+  }, []);
+
   return (
     <>
       <div
-        className="bg-transparent h-[60px] px-16 flex items-center justify-between
-        fixed w-full z-40"
+        className={`${
+          isVisible ? "bg-[#2a2a2a] border-b border-[#000]" : "bg-transparent"
+        } h-[60px] px-16 flex items-center justify-between
+        fixed w-full z-40`}
       >
         <p className="text-xl font-bold text-green-500">씨네월드</p>
         <div>
@@ -15,7 +44,7 @@ export default function Header() {
           </ul>
         </div>
       </div>
-      <Outlet />
+      <Outlet context={mainRef} />
     </>
   );
 }
