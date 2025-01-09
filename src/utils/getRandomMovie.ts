@@ -9,5 +9,6 @@ export const getRandomMovie = async () => {
     return popularMovieList[randomIndex];
   } catch (err) {
     console.log(err);
+    throw err;
   }
 };
