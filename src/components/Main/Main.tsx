@@ -4,6 +4,7 @@ import { useOutletContext } from "react-router";
 import VideoLists from "../VideoLists";
 import MainRandomMovie from "./MainRandomMovie";
 import { RefObject } from "react";
+import PeopleLists from "../People/PeopleLists";
 
 type ContextType = RefObject<HTMLDivElement>;
 
@@ -28,11 +29,13 @@ export default function Main() {
         <MainRandomMovie />
       </div>
 
-      <div className="bg-slate-500 pt-[150px] flex flex-col gap-10 h-[10000px]">
+      <div className="bg-[#2d2d2d] pt-[150px] flex flex-col gap-20">
         <VideoLists title="인기작 TOP 20" name="popular" />
 
         <VideoLists title="현재 상영중인 영화" name="now_playing" />
       </div>
+
+      <PeopleLists />
     </div>
   );
 }
