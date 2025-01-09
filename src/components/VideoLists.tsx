@@ -21,7 +21,7 @@ export default function VideoLists({ title, name }: VideoListsType) {
 
   return (
     <div className="px-20">
-      <h1 className="font-bold text-4xl mb-5">{title}</h1>
+      <h1 className="font-bold text-4xl mb-5 text-white">{title}</h1>
       <Swiper
         modules={[Navigation, A11y]}
         spaceBetween={5}

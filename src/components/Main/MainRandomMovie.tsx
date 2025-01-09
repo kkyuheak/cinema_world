@@ -7,7 +7,7 @@ export default function MainRandomMovie() {
     queryKey: ["MainRandomMovie"],
     queryFn: getRandomMovie,
   });
-  console.log("query", data);
+  // console.log("query", data);
 
   if (isLoading) {
     return (
