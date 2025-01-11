@@ -25,4 +25,8 @@ interface ResultsType {
   vote_average: number;
   vote_count: number;
   media_type?: string;
+
+  // TV
+  original_country?: string[];
+  name: string;
 }

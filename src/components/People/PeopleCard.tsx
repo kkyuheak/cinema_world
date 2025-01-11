@@ -18,13 +18,17 @@ export default function PeopleCard({
       hover:translate-y-[-15px]  transition duration-300
     "
     >
-      <p className="font-extrabold text-[20px] text-white text-center">
+      <p
+        className={`font-extrabold text-white text-center ${
+          name.length > 11 ? "text-[16px]" : "text-[20px]"
+        }`}
+      >
         {name}
       </p>
       <img
         src={`${imageUrl}${profile_path}`}
         alt="Person Profile"
-        className="w-[70px] h-[70px] rounded-full"
+        className="w-[60px] h-[60px] rounded-full"
       />
       <p className="font-bold text-white text-[14px]">
         {known_for_department === "Acting" ? "배우" : "감독"}

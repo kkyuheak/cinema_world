@@ -5,6 +5,7 @@ import VideoLists from "../VideoLists";
 import MainRandomMovie from "./MainRandomMovie";
 import { RefObject } from "react";
 import PeopleLists from "../People/PeopleLists";
+import MainTvSlide from "./TvSection/MainTvSlide";
 
 type ContextType = RefObject<HTMLDivElement>;
 
@@ -12,7 +13,7 @@ export default function Main() {
   const mainRef = useOutletContext<ContextType>();
 
   return (
-    <div>
+    <div className="bg-[#2d2d2d]">
       <div
         ref={mainRef}
         className={`bg-[url("/src/assets/img/main-bg.jpg")] h-screen bg-no-repeat 
@@ -25,17 +26,19 @@ export default function Main() {
         </div>
       </div>
 
-      <div>
-        <MainRandomMovie />
-      </div>
+      <MainRandomMovie />
 
-      <div className="bg-[#2d2d2d] pt-[150px] flex flex-col gap-20">
+      <div className="pt-[150px] flex flex-col gap-20">
         <VideoLists title="인기작 TOP 20" name="popular" />
-
         <VideoLists title="현재 상영중인 영화" name="now_playing" />
       </div>
 
+      {/* 인물 리스트 */}
       <PeopleLists />
+
+      <div className="pt-[150px] flex items-center justify-center">
+        <MainTvSlide />
+      </div>
     </div>
   );
 }
