@@ -34,10 +34,7 @@ export default function PeopleLists() {
   }, []);
 
   return (
-    <div
-      className="bg-[#2d2d2d] pt-[200px] flex justify-center"
-      ref={peopleListRef}
-    >
+    <div className="pt-[200px] flex justify-center" ref={peopleListRef}>
       <div
         className={`flex gap-6 max-w-[1650px] flex-wrap justify-center ${
           isVisible
