@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import PeopleCard from "./PeopleCard";
 import { getPeopleList } from "../../utils/api/getPeopleList";
 import { useEffect, useRef, useState } from "react";
+import MoreBtn from "../Common/MoreBtn";
 
 export default function PeopleLists() {
   const { data, isLoading } = useQuery<PeopleListType>({
@@ -18,7 +19,7 @@ export default function PeopleLists() {
         setIsVisible(entry.isIntersecting);
       },
       {
-        threshold: 0.55,
+        threshold: 0.2,
       }
     );
 
@@ -52,6 +53,7 @@ export default function PeopleLists() {
             />
           );
         })}
+        <MoreBtn text="더 많은 인물 보러가기" />
       </div>
     </div>
   );
