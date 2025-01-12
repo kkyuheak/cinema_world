@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Outlet } from "react-router";
+import { Link, Outlet, useNavigate } from "react-router";
 
+import Logo from "../../assets/img/header_logo.svg";
 export default function Header() {
+  const navigate = useNavigate();
+
   const [isVisible, setIsVisible] = useState(false);
   const mainRef = useRef<HTMLDivElement | null>(null);
 
@@ -36,11 +39,20 @@ export default function Header() {
         } h-[60px] px-16 flex items-center justify-between
         fixed w-full z-40`}
       >
-        <p className="text-xl font-bold text-green-500">씨네월드</p>
+        <img
+          src={Logo}
+          alt="헤더 로고"
+          className="cursor-pointer"
+          onClick={() => navigate("/")}
+        />
         <div>
           <ul className="flex gap-4 text-white">
-            <li>로그인</li>
-            <li>회원가입</li>
+            <li>
+              <Link to="/login">로그인</Link>
+            </li>
+            <li>
+              <Link to="/register">회원가입</Link>
+            </li>
           </ul>
         </div>
       </div>
