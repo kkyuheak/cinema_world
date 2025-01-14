@@ -8,7 +8,9 @@ import "../css/swiper.css";
 import { useQuery } from "@tanstack/react-query";
 import { getTvList } from "../utils/api/getTvList";
 import { getTrendingList } from "../utils/api/getTrendingList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+import Modal from "./Common/Modal";
 
 interface VideoListsType {
   title: string;
@@ -18,6 +20,32 @@ interface VideoListsType {
 
 export default function VideoLists({ title, name, type }: VideoListsType) {
   const [optionValue, setOptionValue] = useState("day");
+  const [showModal, setShowModal] = useState(false);
+
+  const [modalData, setModalData] = useState<{
+    title: string;
+    desc: string;
+    image: string;
+    genre: number[];
+    vote_average: number;
+  }>({
+    title: "",
+    desc: "",
+    image: "",
+    genre: [],
+    vote_average: 0,
+  });
+
+  const handleImgClick = (
+    title: string,
+    desc: string,
+    image: string,
+    genre: number[],
+    vote_average: number
+  ) => {
+    setModalData({ title, desc, image, genre, vote_average });
+    setShowModal(true);
+  };
 
   const { data, isLoading } = useQuery<listDataType>({
     queryKey: [`${title} Lists`, type === "trending" ? optionValue : ""],
@@ -33,8 +61,12 @@ export default function VideoLists({ title, name, type }: VideoListsType) {
   });
   // console.log("query", data, isLoading);
 
+  useEffect(() => {
+    console.log(showModal);
+  }, [showModal]);
+
   return (
-    <div className="px-20">
+    <div className="px-20 relative">
       <div className=" flex items-center gap-4 mb-5">
         <h1 className="font-bold text-4xl text-white">{title}</h1>
         {type === "trending" && (
@@ -78,6 +110,15 @@ export default function VideoLists({ title, name, type }: VideoListsType) {
           return (
             <SwiperSlide key={item.id}>
               <img
+                onClick={() =>
+                  handleImgClick(
+                    item.title,
+                    item.overview,
+                    item.backdrop_path,
+                    item.genre_ids,
+                    item.vote_average
+                  )
+                }
                 src={`https://image.tmdb.org/t/p/original${item.poster_path}`}
                 alt="포스터 이미지"
                 className="w-[200px] h-[300px] rounded-[10px] cursor-pointer shadow-sm shadow-black 
@@ -87,6 +128,17 @@ export default function VideoLists({ title, name, type }: VideoListsType) {
           );
         })}
       </Swiper>
+      {showModal &&
+        createPortal(
+          <div
+            className="bg-[#000000a7] w-screen h-screen fixed top-0 left-0 z-50
+            flex items-center justify-center"
+            onClick={() => setShowModal(false)}
+          >
+            <Modal onClose={() => setShowModal(false)} modalData={modalData} />
+          </div>,
+          document.body
+        )}
     </div>
   );
 }
